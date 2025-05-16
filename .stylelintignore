@@ -1,0 +1,27 @@
+# Ignore build output
+.next/
+out/
+build/
+dist/
+
+# Ignore dependencies
+node_modules/
+
+# Ignore cache folders
+.cache/
+.vercel/
+
+# Ignore generated files
+public/
+
+# Ignore coverage reporting files
+coverage/
+
+# Ignore specific files/patterns
+*.min.css
+*.d.ts
+**/third-party/**
+
+# Ignore Next.js specific files
+.next/
+next-env.d.ts
