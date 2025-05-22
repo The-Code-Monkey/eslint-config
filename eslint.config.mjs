@@ -5,6 +5,7 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import typescriptParser from "@typescript-eslint/parser";
 import eslintPluginReadableTailwind from "eslint-plugin-readable-tailwind";
+import tseslint from "typescript-eslint";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,7 +14,10 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [
+const eslintConfig = tseslint.config(
+  tseslint.configs.strictTypeChecked,
+  tseslint.configs.stylisticTypeChecked,
+[
   {
     files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
@@ -34,6 +38,12 @@ const eslintConfig = [
           ...eslintPluginReadableTailwind.configs.warning.rules,
           // enable all recommended rules to error
           ...eslintPluginReadableTailwind.configs.error.rules,
+          "@typescript-eslint/no-unnecessary-type-parameters": "off"
+    },
+    settings: {
+      "readable-tailwind": {
+        entryPoint: "./app/globals.css"
+      }
     }
   },
   ...compat.extends(
@@ -104,6 +114,6 @@ const eslintConfig = [
       ],
     },
   },
-];
+]);
 
 export default eslintConfig;
